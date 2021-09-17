@@ -3,17 +3,22 @@
 #include <stdio.h>
 
 void selectionSort(int vector[], int lenVector){
-    int  aux, pozMini;
+//ia elementul curent
+//comparal cu cel din urma pana gasesti unu mai mare
+//schimba le
+
+    int aux;
 
     for (int i = 0; i < lenVector; i++){
-        pozMini = i;
-        for (int j = i + 1; j <= lenVector; j++){ //nu tre sa vedem si prim
-            if (vector[j] <= vector[pozMini]) pozMini = j;
+        for (int j = i; j > 0; j--){
+            if (vector[j] <= vector[j-1]){
+                aux = vector[j];
+                vector[j] = vector[j-1];
+                vector[j-1] = aux;
+            }else{break;}
         }
-        aux = vector[i];
-        vector[i] = vector[pozMini];
-        vector[pozMini] = aux;
     }
+
 }
 
 

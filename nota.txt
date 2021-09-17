@@ -1,0 +1,3 @@
+implementeaza heap si heap sort
+merge sort
+quicksort in wk
