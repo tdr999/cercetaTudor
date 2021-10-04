@@ -1,0 +1,3 @@
+gcc -E main.c si genereaza codul cu asta preprocesat
+gcc -s parca face assembly
+

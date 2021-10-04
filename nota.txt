@@ -1,3 +1,8 @@
 implementeaza heap si heap sort
 merge sort
 quicksort in wk
+
+la gcc scrie
+
+gcc -S -fverbose-asm -o2 -masm=intel foo.c ptr assembly vurat
+

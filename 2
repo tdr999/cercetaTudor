@@ -1,0 +1,223 @@
+	.file	"stack.c"
+	.intel_syntax noprefix
+# GNU C17 (Ubuntu 9.3.0-17ubuntu1~20.04) version 9.3.0 (x86_64-linux-gnu)
+#	compiled by GNU C version 9.3.0, GMP version 6.2.0, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.22.1-GMP
+
+# GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+# options passed:  -imultiarch x86_64-linux-gnu stack.c -masm=intel
+# -mtune=generic -march=x86-64 -auxbase-strip 2 -fverbose-asm
+# -fasynchronous-unwind-tables -fstack-protector-strong -Wformat
+# -Wformat-security -fstack-clash-protection -fcf-protection
+# options enabled:  -fPIC -fPIE -faggressive-loop-optimizations
+# -fassume-phsa -fasynchronous-unwind-tables -fauto-inc-dec -fcommon
+# -fdelete-null-pointer-checks -fdwarf2-cfi-asm -fearly-inlining
+# -feliminate-unused-debug-types -ffp-int-builtin-inexact -ffunction-cse
+# -fgcse-lm -fgnu-runtime -fgnu-unique -fident -finline-atomics
+# -fipa-stack-alignment -fira-hoist-pressure -fira-share-save-slots
+# -fira-share-spill-slots -fivopts -fkeep-static-consts
+# -fleading-underscore -flifetime-dse -flto-odr-type-merging -fmath-errno
+# -fmerge-debug-strings -fpeephole -fplt -fprefetch-loop-arrays
+# -freg-struct-return -fsched-critical-path-heuristic
+# -fsched-dep-count-heuristic -fsched-group-heuristic -fsched-interblock
+# -fsched-last-insn-heuristic -fsched-rank-heuristic -fsched-spec
+# -fsched-spec-insn-heuristic -fsched-stalled-insns-dep -fschedule-fusion
+# -fsemantic-interposition -fshow-column -fshrink-wrap-separate
+# -fsigned-zeros -fsplit-ivs-in-unroller -fssa-backprop
+# -fstack-clash-protection -fstack-protector-strong -fstdarg-opt
+# -fstrict-volatile-bitfields -fsync-libcalls -ftrapping-math -ftree-cselim
+# -ftree-forwprop -ftree-loop-if-convert -ftree-loop-im -ftree-loop-ivcanon
+# -ftree-loop-optimize -ftree-parallelize-loops= -ftree-phiprop
+# -ftree-reassoc -ftree-scev-cprop -funit-at-a-time -funwind-tables
+# -fverbose-asm -fzero-initialized-in-bss -m128bit-long-double -m64 -m80387
+# -malign-stringops -mavx256-split-unaligned-load
+# -mavx256-split-unaligned-store -mfancy-math-387 -mfp-ret-in-387 -mfxsr
+# -mglibc -mieee-fp -mlong-double-80 -mmmx -mno-sse4 -mpush-args -mred-zone
+# -msse -msse2 -mstv -mtls-direct-seg-refs -mvzeroupper
+
+	.text
+	.globl	makeNode
+	.type	makeNode, @function
+makeNode:
+.LFB6:
+	.cfi_startproc
+	endbr64	
+	push	rbp	#
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	mov	rbp, rsp	#,
+	.cfi_def_cfa_register 6
+	sub	rsp, 32	#,
+	mov	DWORD PTR -20[rbp], edi	# k, k
+	mov	QWORD PTR -32[rbp], rsi	# nxt, nxt
+# stack.c:10:     struct node *nod = (struct node*) malloc(sizeof(struct node*));
+	mov	edi, 8	#,
+	call	malloc@PLT	#
+	mov	QWORD PTR -8[rbp], rax	# nod, tmp84
+# stack.c:11:     nod->key = k;
+	mov	rax, QWORD PTR -8[rbp]	# tmp85, nod
+	mov	edx, DWORD PTR -20[rbp]	# tmp86, k
+	mov	DWORD PTR [rax], edx	# nod_3->key, tmp86
+# stack.c:12:     nod->next = nxt; 
+	mov	rax, QWORD PTR -8[rbp]	# tmp87, nod
+	mov	rdx, QWORD PTR -32[rbp]	# tmp88, nxt
+	mov	QWORD PTR 8[rax], rdx	# nod_3->next, tmp88
+# stack.c:13:     return nod;
+	mov	rax, QWORD PTR -8[rbp]	# _8, nod
+# stack.c:14: }
+	leave	
+	.cfi_def_cfa 7, 8
+	ret	
+	.cfi_endproc
+.LFE6:
+	.size	makeNode, .-makeNode
+	.comm	cap,8,8
+	.comm	end,8,8
+	.globl	push
+	.type	push, @function
+push:
+.LFB7:
+	.cfi_startproc
+	endbr64	
+	push	rbp	#
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	mov	rbp, rsp	#,
+	.cfi_def_cfa_register 6
+	sub	rsp, 32	#,
+	mov	DWORD PTR -20[rbp], edi	# x, x
+# stack.c:20:     struct node *nod = makeNode(x, NULL);
+	mov	eax, DWORD PTR -20[rbp]	# tmp85, x
+	mov	esi, 0	#,
+	mov	edi, eax	#, tmp85
+	call	makeNode	#
+	mov	QWORD PTR -8[rbp], rax	# nod, tmp86
+# stack.c:21:     nod->next = cap->next;
+	mov	rax, QWORD PTR cap[rip]	# cap.0_1, cap
+	mov	rdx, QWORD PTR 8[rax]	# _2, cap.0_1->next
+# stack.c:21:     nod->next = cap->next;
+	mov	rax, QWORD PTR -8[rbp]	# tmp87, nod
+	mov	QWORD PTR 8[rax], rdx	# nod_7->next, _2
+# stack.c:22:     cap->next = nod;
+	mov	rax, QWORD PTR cap[rip]	# cap.1_3, cap
+# stack.c:22:     cap->next = nod;
+	mov	rdx, QWORD PTR -8[rbp]	# tmp88, nod
+	mov	QWORD PTR 8[rax], rdx	# cap.1_3->next, tmp88
+# stack.c:23: }//PUSHDOWN STACK ADICA ULTIMU ELEME
+	nop	
+	leave	
+	.cfi_def_cfa 7, 8
+	ret	
+	.cfi_endproc
+.LFE7:
+	.size	push, .-push
+	.globl	pop
+	.type	pop, @function
+pop:
+.LFB8:
+	.cfi_startproc
+	endbr64	
+	push	rbp	#
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	mov	rbp, rsp	#,
+	.cfi_def_cfa_register 6
+	sub	rsp, 16	#,
+# stack.c:27:     struct node *temp = cap->next;
+	mov	rax, QWORD PTR cap[rip]	# cap.2_1, cap
+# stack.c:27:     struct node *temp = cap->next;
+	mov	rax, QWORD PTR 8[rax]	# tmp87, cap.2_1->next
+	mov	QWORD PTR -8[rbp], rax	# temp, tmp87
+# stack.c:28:     cap->next = cap->next->next;
+	mov	rax, QWORD PTR cap[rip]	# cap.3_2, cap
+	mov	rdx, QWORD PTR 8[rax]	# _3, cap.3_2->next
+# stack.c:28:     cap->next = cap->next->next;
+	mov	rax, QWORD PTR cap[rip]	# cap.4_4, cap
+# stack.c:28:     cap->next = cap->next->next;
+	mov	rdx, QWORD PTR 8[rdx]	# _5, _3->next
+# stack.c:28:     cap->next = cap->next->next;
+	mov	QWORD PTR 8[rax], rdx	# cap.4_4->next, _5
+# stack.c:29:     free(temp);
+	mov	rax, QWORD PTR -8[rbp]	# tmp88, temp
+	mov	rdi, rax	#, tmp88
+	call	free@PLT	#
+# stack.c:30: }
+	nop	
+	leave	
+	.cfi_def_cfa 7, 8
+	ret	
+	.cfi_endproc
+.LFE8:
+	.size	pop, .-pop
+	.section	.rodata
+	.align 8
+.LC0:
+	.string	"Valoarea cap %d\nValoarea final %d\n "
+	.text
+	.globl	main
+	.type	main, @function
+main:
+.LFB9:
+	.cfi_startproc
+	endbr64	
+	push	rbp	#
+	.cfi_def_cfa_offset 16
+	.cfi_offset 6, -16
+	mov	rbp, rsp	#,
+	.cfi_def_cfa_register 6
+# stack.c:34:     cap = makeNode(0, NULL);
+	mov	esi, 0	#,
+	mov	edi, 0	#,
+	call	makeNode	#
+# stack.c:34:     cap = makeNode(0, NULL);
+	mov	QWORD PTR cap[rip], rax	# cap, _1
+# stack.c:35:     end = makeNode(1, NULL);
+	mov	esi, 0	#,
+	mov	edi, 1	#,
+	call	makeNode	#
+# stack.c:35:     end = makeNode(1, NULL);
+	mov	QWORD PTR end[rip], rax	# end, _2
+# stack.c:36:     cap->next = end;
+	mov	rax, QWORD PTR cap[rip]	# cap.5_3, cap
+# stack.c:36:     cap->next = end;
+	mov	rdx, QWORD PTR end[rip]	# end.6_4, end
+	mov	QWORD PTR 8[rax], rdx	# cap.5_3->next, end.6_4
+# stack.c:37:     printf("Valoarea cap %d\nValoarea final %d\n ",cap->key,cap->next->key);
+	mov	rax, QWORD PTR cap[rip]	# cap.7_5, cap
+	mov	rax, QWORD PTR 8[rax]	# _6, cap.7_5->next
+# stack.c:37:     printf("Valoarea cap %d\nValoarea final %d\n ",cap->key,cap->next->key);
+	mov	edx, DWORD PTR [rax]	# _7, _6->key
+# stack.c:37:     printf("Valoarea cap %d\nValoarea final %d\n ",cap->key,cap->next->key);
+	mov	rax, QWORD PTR cap[rip]	# cap.8_8, cap
+# stack.c:37:     printf("Valoarea cap %d\nValoarea final %d\n ",cap->key,cap->next->key);
+	mov	eax, DWORD PTR [rax]	# _9, cap.8_8->key
+	mov	esi, eax	#, _9
+	lea	rdi, .LC0[rip]	#,
+	mov	eax, 0	#,
+	call	printf@PLT	#
+# stack.c:38:     return 0;
+	mov	eax, 0	# _17,
+# stack.c:39: }
+	pop	rbp	#
+	.cfi_def_cfa 7, 8
+	ret	
+	.cfi_endproc
+.LFE9:
+	.size	main, .-main
+	.ident	"GCC: (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0"
+	.section	.note.GNU-stack,"",@progbits
+	.section	.note.gnu.property,"a"
+	.align 8
+	.long	 1f - 0f
+	.long	 4f - 1f
+	.long	 5
+0:
+	.string	 "GNU"
+1:
+	.align 8
+	.long	 0xc0000002
+	.long	 3f - 2f
+2:
+	.long	 0x3
+3:
+	.align 8
+4:
